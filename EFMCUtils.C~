@@ -1,0 +1,94 @@
+#include "EFMCUtils.h"
+
+#include <iostream>
+#include "TH1F.h"
+
+/*____________________________General_________________________________*/
+
+Bool_t EmptyHisto(TH1F* h){
+  // Return kTRUE if histo is empty. Otherwise, returns kFALSE.
+  for(Int_t bin = 1; bin <= h->GetNbinsX() ; bin++){
+    if(h->GetBinContent(bin)!=0){return kFALSE;}
+  }
+  return kTRUE;
+}
+
+/*_________________________Pt2 Analysis_______________________________*/
+
+Double_t GetMaxPt2(TH1F* h){
+  // Returns the MAX value of Pt2 given a certain Pt2 distribution.
+  // IMPORTANT: This functions assumes that tribution does not have empty bins
+  
+  if(h==NULL){std::cout<<"Histo is null!"<<std::endl; return 0;}
+  for(Int_t bin = 1 ; bin <= h->GetNbinsX() ; bin++){
+    Double_t value = h->GetBinContent(bin);
+    if(value==0){
+      return h->GetBinLowEdge(bin);
+    }
+  }
+  return 3.;
+}
+
+Int_t GetMaxPt2Bin(TH1F* h){
+  // Returns the bin where the MAX value of a Pt2 distribution is located.
+  // IMPORTANT: This functions assumes that tribution does not have empty bins
+
+  if(h==NULL){std::cout<<"Histo is null!"<<std::endl; return 0;}  
+  for(Int_t bin = 1 ; bin <= h->GetNbinsX() ; bin++){
+    Double_t value = h->GetBinContent(bin);
+    if(value==0){
+      return bin-1;
+    }
+  }
+  return h->GetNbinsX();
+}
+
+/*___________________________TGraph Customs___________________________*/
+
+void SetXErrNull(TGraphErrors* g){
+  // Function that removes the errors in the X axis for a TGraph
+  Double_t* errors_Y = g->GetEY();
+  for(Int_t point = 0 ; point < g->GetN() ; point++)
+    {
+      g->SetPointError(point,0,errors_Y[point]);  
+    }
+}
+
+void SetXShift(TGraphErrors* g, Double_t shift){
+  // Function that sets a uniform in the X axis for all points in a TGraph
+  Double_t* content_Y = g->GetY();
+  Double_t* content_X = g->GetX();
+  for(Int_t point = 0; point < g->GetN() ; point++)
+    {
+      g->SetPoint(point, content_X[point] + shift , content_Y[point]);
+    }
+}
+
+/*____________________________Calculations_____________________________*/
+Double_t BiggestContentAvge(TGraphErrors* g1 , TGraphErrors* g2){
+  // Return the average of a sample containing the biggest contents of g1 and g2
+  // This method is useful to calculate the average systematic error between two variations
+  // of the Nominal
+  
+  Int_t g1_N = g1->GetN();
+  Int_t g2_N = g2->GetN();
+
+  if(g1_N!=g2_N){std::cout<<"Number of points in TGraphs is not equal!"<<std::endl; return 0;}
+
+  Double_t* g1_content = g1->GetY();
+  Double_t* g2_content = g2->GetY();
+
+  Double_t sum; Int_t N = 0;
+  for(Int_t point = 0 ; point < g1_N ; point++){
+    if(TMath::Abs(g1_content[point])>TMath::Abs(g2_content[point])){
+      sum += TMath::Abs(g1_content[point]);
+      N++;
+    }
+    else{
+      sum += TMath::Abs(g2_content[point]);
+      N++;
+    }
+  }
+  if(N==0){std::cout<<"N==0!. Invalid operation."<<std::endl; return 0;}
+  return sum/N;
+}

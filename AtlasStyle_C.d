@@ -1,0 +1,53 @@
+
+# DO NOT DELETE
+
+./AtlasStyle_C.so: AtlasStyle.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TStyle.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TNamed.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TObject.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/Rtypes.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/RtypesCore.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/ROOT/RConfig.hxx
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/RVersion.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/RConfigure.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/DllImport.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/strtok.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/strlcpy.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/snprintf.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TGenericClassInfo.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TSchemaHelper.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TIsAProxy.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TVirtualIsAProxy.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TStorage.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TVersionCheck.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/RVersion.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TString.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TMathBase.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/ROOT/RStringView.hxx
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/ROOT/TypeTraits.hxx
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TAttLine.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TAttFill.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TAttMarker.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TAttText.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TAttAxis.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TColor.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TArrayI.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TArray.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TROOT.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TDirectory.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TClass.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TDictionary.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/ESTLType.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TObjArray.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TSeqCollection.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TCollection.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TIterator.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TVirtualRWMutex.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TVirtualMutex.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TUUID.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TList.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TBuffer.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/TDataType.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/Bytes.h
+./AtlasStyle_C.so: /home/esteban/opt/root_install/include/RVersion.h /home/esteban/opt/root_install/include/RConfig.h /home/esteban/opt/root_install/include/TClass.h /home/esteban/opt/root_install/include/TDictAttributeMap.h /home/esteban/opt/root_install/include/TInterpreter.h /home/esteban/opt/root_install/include/TROOT.h /home/esteban/opt/root_install/include/TBuffer.h /home/esteban/opt/root_install/include/TMemberInspector.h /home/esteban/opt/root_install/include/TError.h /home/esteban/opt/root_install/include/RtypesImp.h /home/esteban/opt/root_install/include/TIsAProxy.h /home/esteban/opt/root_install/include/TFileMergeInfo.h /home/esteban/opt/root_install/include/TCollectionProxyInfo.h /home/esteban/opt/root_install/bin/rootcling
+AtlasStyle_C__ROOTBUILDVERSION= 6.24/06

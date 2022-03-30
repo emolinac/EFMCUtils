@@ -1,0 +1,21 @@
+#ifndef __EFMCUTILS_H
+#define __EFMCUTILS_H
+
+#include "TH1F.h"
+#include "TGraphErrors.h"
+
+/*____________________________GENERAL_________________________________*/
+
+Bool_t EmptyHisto(TH1F* h);
+
+/*_________________________PT2 ANALYSIS_______________________________*/
+Double_t GetMaxPt2(TH1F* h);
+
+Int_t GetMaxPt2Bin(TH1F* h);
+
+/*___________________________TGraph Customs___________________________*/
+void SetXErrNull(TGraphErrors* g);
+
+void SetXShift(TGraphErrors* g, Double_t shift);
+  
+#endif
