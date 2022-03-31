@@ -9,4 +9,15 @@ To use the macros in your sesions follow these steps in you terminal:
 ```
 .L EFMCUtils.C++
 ```
-4. 
+This will compile the macros into a library that ROOT can read
+4. ROOT checks several options and folder when it is opened. Therefore, we have to specify to it where is located this new library containing our macros. For this matter we modify (or create) the .rootrc file in the ${HOME} folder. Add to this file:
+```
+Unix.*.Root.DynamicPath:     .:${ROOTSYS}/lib:${HOME}/EFMCUtils/lib:
+Unix.*.Root.MacroPath:       .:${HOME}/EFMCUtils:
+
+Root.ShowPath: false
+```
+This should be enough. In case ROOT do not recognizes the macros, add to the file .rootlogon.C, which is usually located at ${HOME}, the following line:
+```
+gROOT->ProcessLine(".L ${HOME}/EFMCUtils/EFMCUtils.C+");
+```
