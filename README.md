@@ -17,6 +17,10 @@ Unix.*.Root.MacroPath:       .:${HOME}/EFMCUtils:
 
 Root.ShowPath: false
 ```
+In the folder containing EFMCUtils.C add a rootlogon.C file with the following line:
+```
+gROOT->LoadMacro("EFMCUtils.C");
+```
 This should be enough. In case ROOT do not recognizes the macros, add to the file .rootlogon.C, which is usually located at ${HOME}, the following line:
 ```
 gROOT->ProcessLine(".L ${HOME}/EFMCUtils/EFMCUtils.C+");

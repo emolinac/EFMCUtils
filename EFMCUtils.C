@@ -1,7 +1,6 @@
 #include "EFMCUtils.h"
 
 #include <iostream>
-#include "TH1F.h"
 
 /*____________________________General_________________________________*/
 
@@ -11,6 +10,80 @@ Bool_t EmptyHisto(TH1F* h){
     if(h->GetBinContent(bin)!=0){return kFALSE;}
   }
   return kTRUE;
+}
+
+void GetQ2NuCentroidLiquid(Int_t Q2_bin, Int_t Nu_bin, TNtuple* limits_tuple, TNtuple* ntuple_data, TH2F* h, Double_t* pairQ2Nu){
+  // Returns (Q2_centroid, Nu_centroid) for the liquid target
+  
+  Float_t Q2_min,Q2_max,Nu_min,Nu_max;
+  Float_t Q2_min_local, Q2_max_local, Nu_min_local, Nu_max_local, Q2_bin_local, Nu_bin_local;
+  
+  limits_tuple->SetBranchAddress("Q2_min",&Q2_min_local);
+  limits_tuple->SetBranchAddress("Q2_max",&Q2_max_local);
+  limits_tuple->SetBranchAddress("Nu_min",&Nu_min_local);
+  limits_tuple->SetBranchAddress("Nu_max",&Nu_max_local);
+  limits_tuple->SetBranchAddress("Q2_bin",&Q2_bin_local);
+  limits_tuple->SetBranchAddress("Nu_bin",&Nu_bin_local);
+
+  for(Int_t tuple_entry = 0 ; tuple_entry < limits_tuple->GetEntries() ; tuple_entry++)
+    {
+      limits_tuple->GetEntry(tuple_entry);
+      if(Q2_bin==Q2_bin_local&&Nu_bin==Nu_bin_local)
+	{
+	  Q2_min = Q2_min_local;
+	  Q2_max = Q2_max_local;
+	  Nu_min = Nu_min_local;
+	  Nu_max = Nu_max_local;
+	  break;
+	}
+    }
+
+  TCut cut = Form("VC_TM==1&&%f<Q2&&Q2<%f&&%f<Nu&&Nu<%f",Q2_min,Q2_max,Nu_min,Nu_max);
+      
+  ntuple_data->Project("h","Nu:Q2",cut);
+
+  pairQ2Nu[0] = h->GetMean(1);
+  pairQ2Nu[1] = h->GetMean(2);
+  std::cout<<"Q2_centroid = "<<pairQ2Nu[0]<<"   Nu_centroid = "<<pairQ2Nu[1]<<std::endl;
+
+  h->Reset();
+}
+
+void GetQ2NuCentroidSolid(Int_t Q2_bin, Int_t Nu_bin, TNtuple* limits_tuple, TNtuple* ntuple_data, TH2F* h, Double_t* pairQ2Nu){
+  // Returns (Q2_centroid, Nu_centroid) for the solid target
+  
+  Float_t Q2_min,Q2_max,Nu_min,Nu_max;
+  Float_t Q2_min_local, Q2_max_local, Nu_min_local, Nu_max_local, Q2_bin_local, Nu_bin_local;
+  
+  limits_tuple->SetBranchAddress("Q2_min",&Q2_min_local);
+  limits_tuple->SetBranchAddress("Q2_max",&Q2_max_local);
+  limits_tuple->SetBranchAddress("Nu_min",&Nu_min_local);
+  limits_tuple->SetBranchAddress("Nu_max",&Nu_max_local);
+  limits_tuple->SetBranchAddress("Q2_bin",&Q2_bin_local);
+  limits_tuple->SetBranchAddress("Nu_bin",&Nu_bin_local);
+
+  for(Int_t tuple_entry = 0 ; tuple_entry < limits_tuple->GetEntries() ; tuple_entry++)
+    {
+      limits_tuple->GetEntry(tuple_entry);
+      if(Q2_bin==Q2_bin_local&&Nu_bin==Nu_bin_local)
+	{
+	  Q2_min = Q2_min_local;
+	  Q2_max = Q2_max_local;
+	  Nu_min = Nu_min_local;
+	  Nu_max = Nu_max_local;
+	  break;
+	}
+    }
+
+  TCut cut = Form("VC_TM==2&&%f<Q2&&Q2<%f&&%f<Nu&&Nu<%f",Q2_min,Q2_max,Nu_min,Nu_max);
+      
+  ntuple_data->Project("h","Nu:Q2",cut);
+
+  pairQ2Nu[0] = h->GetMean(1);
+  pairQ2Nu[1] = h->GetMean(2);
+  std::cout<<"Q2_centroid = "<<pairQ2Nu[0]<<"   Nu_centroid = "<<pairQ2Nu[1]<<std::endl;
+
+  h->Reset();
 }
 
 /*_________________________Pt2 Analysis_______________________________*/
