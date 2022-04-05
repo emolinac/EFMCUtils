@@ -36,5 +36,7 @@ void SetXShift(TGraphErrors* g, Double_t shift);
 
 /*____________________________Calculations_____________________________*/
 Double_t BiggestContentAvge(TGraphErrors* g1 , TGraphErrors* g2);
-  
+
+Double_t BiggestContentAvge_CustomStartPoint(TGraphErrors* g1 , TGraphErrors* g2, Int_t start_point);
+
 #endif

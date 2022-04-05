@@ -218,3 +218,33 @@ Double_t BiggestContentAvge(TGraphErrors* g1 , TGraphErrors* g2){
   if(N==0){std::cout<<"N==0!. Invalid operation."<<std::endl; return 0;}
   return sum/N;
 }
+
+Double_t BiggestContentAvge_CustomStartPoint(TGraphErrors* g1 , TGraphErrors* g2, Int_t start_point){
+  // Return the average of a sample containing the biggest contents of g1 and g2.
+  // However, in this function we start to count the averages from a custom start point : start_point
+  // This method is useful to calculate the average systematic error between two variations
+  // of the Nominal
+  
+  Int_t g1_N = g1->GetN();
+  Int_t g2_N = g2->GetN();
+
+  if(g1_N!=g2_N){std::cout<<"Number of points in TGraphs is not equal!"<<std::endl; return 0;}
+  if(start_point>=g1_N){std::cout<<"Start point is non-sense!!!"<<std::endl; return 0;}
+  
+  Double_t* g1_content = g1->GetY();
+  Double_t* g2_content = g2->GetY();
+
+  Double_t sum = 0; Int_t N = 0;
+  for(Int_t point = start_point ; point < g1_N ; point++){
+    if(TMath::Abs(g1_content[point])>TMath::Abs(g2_content[point])){
+      sum += TMath::Abs(g1_content[point]);
+      N++;
+    }
+    else{
+      sum += TMath::Abs(g2_content[point]);
+      N++;
+    }
+  }
+  if(N==0){std::cout<<"N==0!. Invalid operation."<<std::endl; return 0;}
+  return sum/N;
+}
