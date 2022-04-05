@@ -87,25 +87,7 @@ void GetQ2NuCentroidSolid(Int_t Q2_bin, Int_t Nu_bin, TNtuple* limits_tuple, TNt
 }
 
 /*_________________________kt2 Analysis_______________________________*/
-Double_t GetMeanpt2Signori(Double_t Zh, Double_t zhat, Double_t norm, Double_t beta, Double_t delta, Double_t gamma){
-  // Returns meanpt2, which is represented by Signori et al. function
-  
-  Double_t meanpt2 = norm*(TMath::Power(Zh,beta)+delta)*TMath::Power(1-Zh,gamma)/(TMath::Power(zhat,beta)+delta)*TMath::Power(1-zhat,gamma);
-  
-  return meanpt2;
-}
-
-Double_t GetMeanpt2Beta(Double_t Zh, Double_t norm, Double_t alpha, Double_t beta){
-  // Returns meanpt2, which is represented by a Beta distribution
-  
-  Double_t meanpt2 = norm*TMath::BetaDist(Zh,alpha,beta);
-  
-  return meanpt2;
-}
-
 Double_t GetMeanPt2Signori(Double_t* x, Double_t* pars){
-  // Returns analytic expression of MeanPt2 with Meanpt2 being represented by Signori et al. function
-  // Format is such that fitting is direct
   Double_t Zh = x[0];
   // meanpt2 parameters
   Double_t zhat  = pars[0];
@@ -123,8 +105,6 @@ Double_t GetMeanPt2Signori(Double_t* x, Double_t* pars){
 }
 
 Double_t GetMeanPt2Beta(Double_t* x, Double_t* pars){
-  // Returns analytic expression of MeanPt2 with Meanpt2 being represented by a Beta distribution
-  // Format is such that fitting is direct
   Double_t Zh = x[0];
   // meanpt2 parameters
   Double_t norm   = pars[0];
