@@ -15,8 +15,8 @@ Bool_t EmptyHisto(TH1F* h){
 void GetQ2NuCentroidLiquid(Int_t Q2_bin, Int_t Nu_bin, TNtuple* limits_tuple, TNtuple* ntuple_data, TH2F* h, Double_t* pairQ2Nu){
   // Returns (Q2_centroid, Nu_centroid) for the liquid target
   
-  Float_t Q2_min,Q2_max,Nu_min,Nu_max;
-  Float_t Q2_min_local, Q2_max_local, Nu_min_local, Nu_max_local, Q2_bin_local, Nu_bin_local;
+  Float_t Q2_min=0,Q2_max=0,Nu_min=0,Nu_max=0;
+  Float_t Q2_min_local=0, Q2_max_local=0, Nu_min_local=0, Nu_max_local=0, Q2_bin_local=0, Nu_bin_local=0;
   
   limits_tuple->SetBranchAddress("Q2_min",&Q2_min_local);
   limits_tuple->SetBranchAddress("Q2_max",&Q2_max_local);
@@ -52,8 +52,8 @@ void GetQ2NuCentroidLiquid(Int_t Q2_bin, Int_t Nu_bin, TNtuple* limits_tuple, TN
 void GetQ2NuCentroidSolid(Int_t Q2_bin, Int_t Nu_bin, TNtuple* limits_tuple, TNtuple* ntuple_data, TH2F* h, Double_t* pairQ2Nu){
   // Returns (Q2_centroid, Nu_centroid) for the solid target
   
-  Float_t Q2_min,Q2_max,Nu_min,Nu_max;
-  Float_t Q2_min_local, Q2_max_local, Nu_min_local, Nu_max_local, Q2_bin_local, Nu_bin_local;
+  Float_t Q2_min=0,Q2_max=0,Nu_min=0,Nu_max=0;
+  Float_t Q2_min_local=0, Q2_max_local=0, Nu_min_local=0, Nu_max_local=0, Q2_bin_local=0, Nu_bin_local=0;
   
   limits_tuple->SetBranchAddress("Q2_min",&Q2_min_local);
   limits_tuple->SetBranchAddress("Q2_max",&Q2_max_local);
@@ -84,6 +84,39 @@ void GetQ2NuCentroidSolid(Int_t Q2_bin, Int_t Nu_bin, TNtuple* limits_tuple, TNt
   std::cout<<"Q2_centroid = "<<pairQ2Nu[0]<<"   Nu_centroid = "<<pairQ2Nu[1]<<std::endl;
 
   h->Reset();
+}
+
+/*_________________________kt2 Analysis_______________________________*/
+Double_t GetMeanPt2Signori(Double_t* x, Double_t* pars){
+  Double_t Zh = x[0];
+  // meanpt2 parameters
+  Double_t zhat  = pars[0];
+  Double_t norm  = pars[1];
+  Double_t beta  = pars[2];
+  Double_t delta = pars[3];
+  Double_t gamma = pars[4];
+
+  Double_t meanpt2 = norm*(TMath::Power(Zh,beta)+delta)*TMath::Power(1-Zh,gamma)/(TMath::Power(zhat,beta)+delta)*TMath::Power(1-zhat,gamma);
+  
+  // meankt2 parameter
+  Double_t meankt2 = pars[5];
+
+  return meanpt2 + Zh*Zh*meankt2;
+}
+
+Double_t GetMeanPt2Beta(Double_t* x, Double_t* pars){
+  Double_t Zh = x[0];
+  // meanpt2 parameters
+  Double_t norm   = pars[0];
+  Double_t alpha  = pars[1];
+  Double_t beta   = pars[2];
+
+  Double_t meanpt2 = norm*TMath::BetaDist(Zh,alpha,beta);
+  
+  // meankt2 parameter
+  Double_t meankt2 = pars[3];
+
+  return meanpt2 + Zh*Zh*meankt2;
 }
 
 /*_________________________Pt2 Analysis_______________________________*/
